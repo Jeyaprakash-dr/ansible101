@@ -9,4 +9,4 @@ server2 ansible_host=18.220.96.44
 
 
 [local]
-control ansible_conection=local
+W107Y4NXY2 ansible_conection=local
