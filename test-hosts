@@ -1,5 +1,8 @@
 # Test - hosts to demonstrate
 
+[web]
+#server3 ansible_host=ec2-3-142-222-192.us-east-2.compute.amazonaws.com
+server4 ansible_host=ec2-3-21-205-165.us-east-2.compute.amazonaws.com
 [webservers]
 server1 ansible_host=18.218.62.3
 
@@ -9,4 +12,10 @@ server2 ansible_host=18.220.96.44
 
 
 [local]
-W107Y4NXY2 ansible_conection=local
+W107Y4NXY2 ansible_conection=localhost
+127.0.0.1
+
+[servers]
+server1
+server2
+server4

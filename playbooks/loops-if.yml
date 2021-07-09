@@ -1,0 +1,40 @@
+# SEtup webservers
+---
+  - hosts: web
+    become: true
+    vars:
+      addresses: [Google, Apple, DELL, HPE, Oracle]
+    tasks:
+      - name: update all pacakges
+        yum: name=* state=latest
+
+      - name: install apache server
+        yum:
+          name: httpd
+          state: present
+      - name: delete original index.html file
+        file:
+          path: /var/www/html/index.html
+          state: absent
+
+      - name: create new index.html file
+        lineinfile:
+          create: yes
+          path: /var/www/html/index.html
+          line: "{% if addresses|length > 10 %}
+                  <html> will not print </html>
+                  
+                {% elif addresses|length > 1 %}
+                  <html>
+                  {% for value in addresses %}
+                    <li>{{ value }}</li>
+                  {% endfor %}
+                  </html>
+                {% endif %}"
+
+      - name: start apache service
+        ansible.builtin.service:
+          name: apache2
+          state: started
+
+                

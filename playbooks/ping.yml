@@ -1,0 +1,10 @@
+# Ping playbook
+---
+  - hosts: webservers:bastions
+    tasks:
+      - name: Ping all servers
+        action: ping
+      - name: get the OS of each server
+        shell: uname -a
+        changed_when: False
+      

@@ -1,0 +1,33 @@
+# Setup webservers
+---
+  - hosts: web
+    become: true
+    vars:
+      our_server_number: 5
+    tasks:
+      - name: update all of our packages
+        yum:  name=* state=latest
+        
+      - name: install apache webserver
+        yum: name=httpd state=present
+
+      - name: delete original index.html file
+        file: path=/var/www/html/index.html state=absent
+
+      - name: create new index.html file
+        lineinfile:
+          create: yes 
+          path: /var/www/html/index.html
+          line: <html>{{ "Hello World"|replace("World", "from") }} server3</html>
+        when: our_server_number == 3
+
+      - name: create new index.html file
+        lineinfile:
+          create: yes 
+          path: /var/www/html/index.html
+          line: <html>{{ "Hello World"|replace("World", "from") }} server5</html>
+        when: our_server_number == 5
+    
+    handlers:
+      - name: start apache
+        service: name=httpd state=started

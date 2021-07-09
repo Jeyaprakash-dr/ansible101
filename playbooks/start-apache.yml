@@ -1,0 +1,37 @@
+# Setup webservers
+---
+  - hosts: web
+    become: true
+    tasks:
+#      - name: install bind-utils
+#        yum: name=bind-utils state=present
+
+      - name: install python
+        yum: name=python38 state=present
+
+#      - name: create new index.html file
+#        lineinfile:
+#          create: yes
+#          path: /var/www/html/index.html
+#          line: <html>Hello from Server1</html>
+#        notify: start apache
+
+      - name: start apache
+        ansible.builtin.service:
+          name: httpd
+          state: started
+
+  - hosts: webservers
+    become: true
+    tasks:
+#      - name: install bind-utils
+#        yum: name=bind-utils state=present
+
+      - name: install python
+        yum: name=python38 state=present
+
+      - name: start apache
+        ansible.builtin.service:
+          name: apache2
+          state: started
+                

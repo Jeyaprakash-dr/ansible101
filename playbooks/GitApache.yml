@@ -1,0 +1,39 @@
+# Installing apache and getting git hub repository
+---
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: update all of our packages
+        yum: name=* state=latest
+
+      - name: install apache server
+        yum: name=apache2 state=present
+
+      - name: delete the original html file
+        file:
+          path: /var/www/html/index.html
+          state: absent
+
+
+      - name: create a new folder for Git hub to use
+        file:
+          path: /var/www/github
+          state: directory
+
+      - name: clone the github repo
+        git:
+          repo: 'https://github.com/Jeyaprakash-dr/ansible101.git'
+          dest: /var/www/github
+          clone: yes
+
+#      - name: copy the index.html from Github repo to html folder
+#        copy:
+#          src: /var/www/github/index.html
+#          dest: /var/www/html/index.html
+
+      - name: cp the file from github folder to html folder
+        command: cp /var/www/github/index.html /var/www/html/index.html
+
+    handlers: 
+      - name: start the apache service
+        service: name=apache2 state=started

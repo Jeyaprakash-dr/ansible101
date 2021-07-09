@@ -1,0 +1,9 @@
+# Setup webservers
+---
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: install apache webserver
+        yum: name=apache2 state=present
+      - name: delete original index.html file
+        file: path=/var/www/html/index.html state=absent        
