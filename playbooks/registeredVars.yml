@@ -1,11 +1,11 @@
 # Registered Variables example
 ---
-  - hosts: local
+  - hosts: webservers
     vars:
-      playbooks_location: "/home/jp/ansible/playbooks"
+      playbooks_location: "/var/www/github/ansible101/playbooks"
     tasks:
       - name: get the list of all playbooks conataining the word apache
-        shell: ls {{ playbooks_location }} | grep apache
+        shell: ls {{ playbooks_location }} | grep -i apache
         register: playbooks_with_apache
 
       - name: list out all playbooks containing the word apache
