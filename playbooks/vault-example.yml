@@ -1,0 +1,11 @@
+# demonstrate ansible vault
+---
+  - hosts: local
+
+    vars_files:
+      - ./variables/secret_variables.yml
+
+    tasks:
+      - name: printing out our new password
+        debug:
+          msg: "{{ secret_password }}"

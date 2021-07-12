@@ -1,6 +1,6 @@
 # Setup webservers
 ---
-  - hosts: webservers
+  - hosts: web
     become: true
     tasks:
       - name: update all of our packages
