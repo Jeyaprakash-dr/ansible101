@@ -1,7 +1,7 @@
 # Setup webservers
 ---
-  - hosts: web
+  - hosts: servers
     become: true
     tasks:
       - name: update all of our packages
-        yum:  name=* state=latest
+        yum:  name=python* state=latest

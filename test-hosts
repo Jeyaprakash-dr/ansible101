@@ -5,18 +5,19 @@
 server4 ansible_host=ec2-18-188-132-146.us-east-2.compute.amazonaws.com
 server5 ansible_host=ec2-18-222-240-207.us-east-2.compute.amazonaws.com
 [webservers]
-server1 ansible_host=18.218.62.3
+#server1 ansible_host=18.218.62.3
 
 
 [bastions]
-server2 ansible_host=18.220.96.44
+#server2 ansible_host=18.220.96.44
 
 
 [local]
-W107Y4NXY2 ansible_conection=localhost
+#W107Y4NXY2 ansible_conection=localhost
 127.0.0.1
 
 [servers]
-server1
-server2
+#server1
+#server2
 server4
+server5
