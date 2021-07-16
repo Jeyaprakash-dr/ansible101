@@ -1,0 +1,15 @@
+---
+  - hosts: servers
+    become: true
+    tasks:
+      - name: updating sshd config file
+        lineinfile:
+          path: /etc/ssh/sshd_config
+          line: GSSAPIAuthentication no
+          line: UseDNS no
+        notify:
+          - restart sshd
+
+    handlers:
+      - name: restart sshd
+        service: name=sshd state=restarted
