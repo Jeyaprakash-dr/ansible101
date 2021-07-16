@@ -3,7 +3,12 @@
   - hosts: web
     become: true
     vars:
-      addresses: [Google, Apple, DELL, HPE, Oracle]
+     # addresses: [Google, Apple, DELL, HPE, Oracle]
+     names: [JP, VP, KP, Jitesh]
+
+     vars_files:
+      - list.yml
+      
     tasks:
       - name: update all pacakges
         yum: name=* state=latest

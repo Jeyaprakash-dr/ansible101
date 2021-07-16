@@ -1,0 +1,36 @@
+# Looping example
+
+---
+  - hosts: server4
+    become: true
+    vars:
+      names: [JP, VP, KP, Jitesh]
+
+    vars_files:
+      - list.yml
+
+    tasks:
+      - name: print the days fo the week
+        debug:
+          msg: "{{ item }}"
+        loop:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+
+      - name: Print a list of names
+        debug:
+          msg: "{{ my_idx }}: {{ item }}"
+        loop: "{{names}}"
+        loop_control:
+          index_var: my_idx
+
+      - name: printa a list of numbers
+        debug:
+          msg: "{{ item }}"
+        loop: "{{directions}}"
+
